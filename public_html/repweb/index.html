@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0\css\font-awesome.css">
+    <title>Repro Nafa</title>
+</head>
+
+<body>
+
+    <div class="heading">
+        <h2>Reproductor de video personalizado</h2>
+        <h3>José Mario Pérez Nafarrate</h3>
+    </div>
+
+    <div class="heading">
+        <h4>Lista de videos</h4>
+            <li onclick="setVeneciaVid()"><a href="#">venecia</a></li>
+            <li onclick="setCommercialVid()"><a href="#">comercial</a></li>
+            <li onclick="setAfricaVid()"><a href="#">africa</a></li>
+    </div>
+    <br>
+
+    <div class="video-player">
+        <video id="videoPlayer" width="500px" height="500px">
+            <source src="videos/video2.mov" type="video/mp4">
+            Tu navegador no soporta el vídeo de HTML5
+        </video>
+
+        <br>
+        <div class="controls">
+
+
+            <div class="progress">
+                <div class="progress__filled"></div>
+            </div>
+            <br>
+            <div class="labelTime"></div>
+
+
+        </div>
+
+
+
+        <div class="tooltip">
+            <button onclick="playPause()"><i class="fa fa-play" aria-hidden="true"></i></button>
+            <span class="tooltiptext">Reproducir</span>
+        </div>
+
+        <div class="tooltip">
+            <button onclick="playPause()"><i class="fa fa-pause" aria-hidden="true"></i></button>
+            <span class="tooltiptext">Pausar</span>
+        </div>
+
+
+        <div class="tooltip">
+            <button onclick="muteVideo()"><i class="fa fa-volume-off" aria-hidden="true"></i></button>
+            <span class="tooltiptext">Mute</span>
+        </div>
+        
+        <div class="tooltip">
+            <button onclick="volumeDown()"><i class="fa fa-volume-down" aria-hidden="true"></i></button>    
+            <span class="tooltiptext">Bajar volumen</span>
+        </div>
+        
+        <div class="tooltip">
+            <button onclick="volumeUp()"><i class="fa fa-volume-up" aria-hidden="true"></i></button>
+            <span class="tooltiptext">Subir volumen</span>
+        </div>
+        
+        <div class="tooltip">
+            <button onclick="makeNormal()"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+            <span class="tooltiptext">Tamaño normal</span>
+        </div>
+        
+        <div class="tooltip">
+            <button onclick="makeLarge()"><i class="fa fa-window-maximize" aria-hidden="true"></i></button>
+            <span class="tooltiptext">Maximizar</span>
+        </div>
+
+        <div class="tooltip">
+            <button onclick="makeSmall()"><i class="fa fa-window-minimize" aria-hidden="true"></i></button>
+            <span class="tooltiptext">Minimizar</span>
+        </div>
+        
+        <div class="tooltip">
+            <button onclick="lowspeed()">0.5x</button>    
+            <span class="tooltiptext">Velocidad 0.5x</span>
+        </div>
+
+        <div class="tooltip">
+            <button onclick="normalspeed()">1.0x</button>
+            <span class="tooltiptext">Velocidad normal</span>
+        </div>
+        
+        <div class="tooltip">
+            <button onclick="fastspeed()">2.0x</button>
+            <span class="tooltiptext">Velocidad 2.0x</span>
+        </div>
+        
+        <div class="tooltip">
+            <button type="button" id="screenshot-vid-recording"><i class="fa fa-camera" aria-hidden="true"></i></button>
+            <span class="tooltiptext">Screenshot</span>
+        </div>
+        
+        <div class="tooltip">
+            <button onclick="prev()"><i class="fa fa-step-backward" aria-hidden="true"></i></button>
+            <span class="tooltiptext">Anterior</span>
+        </div>
+        
+        <div class="tooltip">
+            <button onclick="next()"><i class="fa fa-step-forward" aria-hidden="true"></i></button>
+            <span class="tooltiptext">Siguiente</span>
+        </div>
+
+    </div>
+
+</body>
+
+<script>
+
+    var arrVids = ['videos/video2.mov','videos/video.mp4','videos/video3.mp4'];
+    console.log(arrVids[0]);
+
+    var video = document.getElementById("videoPlayer");
+
+    const progress = document.querySelector(".progress");
+    const progressBar = document.querySelector(".progress__filled");
+
+    const labelTime = document.querySelector(".labelTime");
+
+    function handleProgress() {
+        const progressPercentage = (video.currentTime / video.duration) * 100;
+        progressBar.style.flexBasis = `${progressPercentage}%`;
+        labelTime.textContent = video.currentTime + " segs de " + video.duration + " segs";
+
+    }
+
+    function scrub(e) {
+        const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
+        video.currentTime = scrubTime;
+        console.log(scrubTime);
+    }
+
+    video.addEventListener("timeupdate", handleProgress);
+    progress.addEventListener("click", scrub);
+    let mousedown = false;
+    progress.addEventListener("mousedown", () => (mousedown = true));
+    progress.addEventListener("mousemove", (e) => mousedown && scrub(e));
+    progress.addEventListener("mouseup", () => (mousedown = false));
+
+
+    function playPause() {
+        if (video.paused)
+            video.play();
+        else
+            video.pause();
+    }
+    function reload() {
+        video.load();
+    }
+    function makeLarge() {
+        video.width = 1000;
+        video.height = 1000;
+    }
+    function makeSmall() {
+        video.width = 250;
+        video.height = 250;
+    }
+    function makeNormal() {
+        video.width = 500;
+        video.height = 500;
+    }
+    function muteVideo() {
+        if (video.muted)
+            video.muted = false;
+        else
+            video.muted = true;
+    }
+    function volumeUp() {
+        if (video.volume == 1.0)
+            alert("volumen al 100%");
+        else
+            video.volume = video.volume + 0.1;
+        console.log(video.volume);
+    }
+
+    function volumeDown() {
+        if (video.volume < 0.1)
+            alert("volumen al mínimo");
+        else
+            video.volume = video.volume - 0.1;
+        console.log(video.volume);
+    }
+
+    function fastspeed() {
+        video.playbackRate = 2;
+    }
+    function lowspeed() {
+        video.playbackRate = 0.5;
+    }
+    function normalspeed() {
+        video.playbackRate = 1;
+    }
+
+    var screenshotButton = document.getElementById("screenshot-vid-recording");
+    screenshotButton.addEventListener("click", onCapture);
+    var canvas = document.createElement("canvas")
+
+    function onCapture() {
+        var video = document.querySelector("video");
+        console.log(new Date(), "capture", video.videoWidth, video.videoHeight)
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        canvas
+            .getContext("2d")
+            .drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+
+        canvas.toBlob(async (blob) => {
+            {
+                const a = document.createElement('a') // Create "a" element
+                const url = URL.createObjectURL(blob) // Create an object URL from blob
+                a.setAttribute('href', url) // Set "a" element link
+                a.setAttribute('download', "image.png") // Set download filename
+                a.click() // Start downloading   
+            };
+        });
+    }
+
+    function setVeneciaVid(){
+        video.setAttribute('src','videos/video2.mov');
+        video.load;
+    }
+    function setCommercialVid(){
+        video.setAttribute('src','videos/video.mp4');
+        video.load;
+    }
+    function setAfricaVid(){
+        video.setAttribute('src','videos/video3.mp4');
+        video.load;
+    }
+
+    var cont = 0;
+
+    function next(){
+        
+        if(cont < 2)
+            cont = cont + 1
+        else
+            cont = 0
+
+    var videoPlay = arrVids[cont];
+    video.setAttribute('src',videoPlay);
+        video.load;
+
+    }
+
+    function prev(){
+        
+        if(cont == 0)
+            cont = 2
+        else
+            cont = cont - 1 
+
+    var videoPlay = arrVids[cont];
+    video.setAttribute('src',videoPlay);
+        video.load;
+
+    }
+
+
+</script>
+
+</html>

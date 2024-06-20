@@ -1,0 +1,88 @@
+.heading{
+    text-align: center;
+    color: aliceblue;
+}
+
+body{
+    background: rgb(63,94,251);
+    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+}
+
+.video-player{
+    text-align: center;
+    
+    
+}
+
+#videoPlayer{
+    border-radius: 10px;
+}
+
+button{
+    border-radius: 20px;
+       
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    cursor: pointer;
+  }
+
+  button:hover{
+    cursor: pointer;
+  }
+
+  .controls {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 50%;
+    background: rgba(0,0,0,0.1);
+  }
+
+  .progress {
+    flex: 10;
+    position: relative;
+    display: flex;
+    flex-basis: 100%;
+    height: 5px;
+    /* background: rgba(0,0,0,0.5); */
+    background: rgba(255,255,255,0.5);
+    cursor: pointer;
+    height: 15px;
+    border-radius: 15px;
+    box-shadow: 10px 5px 5px black;
+  }
+  .progress__filled {
+    width: 50%;
+    background: purple;
+    flex: 0;
+    flex-basis: 0%;
+    border-radius: 15px;
+    box-shadow: 10px 5px 5px black;
+  }
+  
