@@ -1,13 +1,48 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video CDN azure</title>
+    <title>Reproductor de Video Personalizado</title>
+    
+    <style>
+        /* Estilos para el reproductor de video */
+.video-player {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #e0ffe0; /* Cambia el color de fondo a verde */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.video {
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+body{
+    background-color: gray;
+}
+
+    </style>
 </head>
 <body>
-    
+    <h1>Reproductor de Video CDN Azure</h1>
+    <h2> José Mario Pérez Nafarrate</h2>
 
-    <video src="https://tartarusstorage.blob.core.windows.net/tartarusblob1/VIDEO-2024-06-14-08-58-24.mp4" controls autoplay></video>
+    <div class="video-player">
+        <video class="video" controls>
+            <source src="https://tartarusstorage.blob.core.windows.net/tartarusblob1/VIDEO-2024-06-14-08-58-24.mp4" type="video/mp4">
+            <p>Tu navegador no admite video HTML5.</p>
+        </video>
+        <p>CDN: https://tartarusstorage.blob.core.windows.net/tartarusblob1/VIDEO-2024-06-14-08-58-24.mp4</p>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>

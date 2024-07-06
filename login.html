@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Agrega espaciado a los contenedores */
+        .container {
+            padding: 16px;
+        }
+
+        /* Campos de entrada de ancho completo */
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            display: inline-block;
+            border: none;
+            background: #f1f1f1;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+
+        /* Estilos personalizados para la línea divisoria */
+        hr {
+            border: 1px solid #f1f1f1;
+            margin-bottom: 25px;
+        }
+
+        /* Estilo para el botón de registro */
+        .registerbtn {
+            background-color: #04AA6D;
+            color: white;
+            padding: 16px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+        .registerbtn:hover {
+            opacity: 1;
+        }
+
+        /* Color de texto azul para los enlaces */
+        a {
+            color: dodgerblue;
+        }
+
+        /* Estilo para la sección de inicio de sesión */
+        .signin {
+            background-color: #f1f1f1;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <form action="action_page.php">
+        <div class="container">
+            <h1>Registro</h1>
+            <p>Por favor, completa este formulario para crear una cuenta.</p>
+            <hr>
+            <label for="email"><b>Email</b></label>
+            <input type="text" placeholder="Ingresa tu email" name="email" id="email" required>
+
+            <label for="psw"><b>Contraseña</b></label>
+            <input type="password" placeholder="Ingresa tu contraseña" name="psw" id="psw" required>
+
+            <label for="psw-repeat"><b>Repetir Contraseña</b></label>
+            <input type="password" placeholder="Repite tu contraseña" name="psw-repeat" id="psw-repeat" required>
+
+            <hr>
+            <p>Al crear una cuenta, aceptas nuestros <a href="#">Términos y Privacidad</a>.</p>
+            <button type="submit" class="registerbtn">Registrarse</button>
+        </div>
+
+        <div class="container signin">
+            <p>¿Ya tienes una cuenta? <a href="#">Iniciar sesión</a>.</p>
+        </div>
+    </form>
+</body>
+</html>

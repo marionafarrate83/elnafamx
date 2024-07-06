@@ -1,7 +1,16 @@
-*{
-    margin: 0;
-    padding: 0;
+/* Estilos para el reproductor de video */
+.video-player {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #e0ffe0; /* Cambia el color de fondo a verde */
+    padding: 20px;
+    border-radius: 10px;
 }
+
+.video {
+    width: 100%;
+}
+
 
 .main{
     width: 100%;
