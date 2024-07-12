@@ -36,8 +36,6 @@ function getUserInfo(user){
     console.log("getUserInfo " + userId);
 }
 
-
-
 let boton = document.getElementById("btnGuardarPx")
 boton.addEventListener("click",addPatient);
 
