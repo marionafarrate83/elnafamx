@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Medicapp</title>
     <script defer type="module" src="logged.js"></script>
 </head>
 <body>
@@ -16,7 +16,16 @@
     <img id="profile">
     <br>
     <button id="newPxBtn">Nuevo Paciente</button>
-    <div id="listaPx"></div>
+    <div id="listaPx">
+        <table>
+            <tr>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Action</th>
+            </tr>
+            <tbody id="rows"></tbody>
+        </table>
+    </div>
     <input type="hidden" id="load"></input>
 </body>
 </html>

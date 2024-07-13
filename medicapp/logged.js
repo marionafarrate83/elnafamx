@@ -1,17 +1,15 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
 import {
   getAuth,
-  signInWithPopup,
   onAuthStateChanged,
-  signOut,
+  signOut
 } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
 import {
   getDatabase,
   ref,
-  set,
+  onValue,
   child,
-  push,
-  onValue
+  get
 } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js";
 
 const firebaseConfig = {
@@ -29,12 +27,13 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
 console.log(database);
+let varUid = "";
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
     updateUserProfile(user);
-    const uid = user.uid;
-    return uid;
+    varUid = user.uid;
+    return varUid;
   } else {
     window.location.href = "index.html";
   }
@@ -76,6 +75,7 @@ botonLoad.addEventListener("click",readDoctorPatients());
 const divLista = document.getElementById("listaPx")
 
 function readDoctorPatients() {
+  
   const dbRef = ref(database, "patient");
 
   onValue(
@@ -84,13 +84,30 @@ function readDoctorPatients() {
       snapshot.forEach((childSnapshot) => {
         const childKey = childSnapshot.key;
         const childData = childSnapshot.val();
-        console.log(childKey);
+        console.log("childKey "+childKey);
         console.log(childData);
         console.log(childData.doctorId);
         console.log(childData.nombrePx);
         console.log(childData.edadPx);
-        listaPx.append(childData.nombrePx);
-        listaPx.append(", ");
+        if (childData.doctorId == varUid){
+          var newRow = document.createElement("tr");
+          var newCell = document.createElement("td");
+          var newCell2 = document.createElement("td");
+          var newButton = document.createElement("button")
+          newButton.innerText="Editar";
+          newButton.setAttribute("value",childKey);
+          newButton.setAttribute("id",childKey);
+          newButton.addEventListener("click",function(){
+            console.log(newButton.value)
+            window.location.href = "newPx.html"+"?px=" + newButton.value
+          });
+          newCell.innerHTML = childData.nombrePx;
+          newRow.append(newCell);
+          newCell2.innerHTML = childData.edadPx;
+          newRow.append(newCell2);
+          newRow.append(newButton);
+          document.getElementById("rows").appendChild(newRow);
+        }
       });
     },
     {
