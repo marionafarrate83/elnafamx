@@ -3,29 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Medicapp</title>
     <script defer type="module" src="logged.js"></script>
 </head>
 <body>
-    <button id="logoutBtn">Logout</button>
-    <br>
-    Logged Page
-    User Details:
-    <div id="name"></div>
-    <div id="email"></div>
-    <img id="profile">
-    <br>
-    <button id="newPxBtn">Nuevo Paciente</button>
-    <div id="listaPx">
-        <table>
-            <tr>
-                <th>Nombre</th>
-                <th>Edad</th>
-                <th>Action</th>
-            </tr>
+
+    <div class="w3-bar w3-black">
+        <a href="./medicapp/index.html" class="w3-bar-item w3-button">Medicapp </a>
+        
+        <a href="#" class="w3-bar-item w3-button w3-right"  id="logoutBtn">Logout <i class="fa fa-sign-in"></i></a>
+        <a href="#" class="w3-bar-item w3-button w3-right" id="email"></a>
+        <a href="#" class="w3-bar-item w3-button w3-right" id="name"></a>
+        <img id="profile" class="w3-right" style="width: 30px; border-radius: 50%; margin-top: 5px;">
+        
+    </div>
+    
+
+    <header class="w3-container w3-padding-16">
+        <button id="newPxBtn"> <i class="fa fa-id-card"></i> Nuevo Paciente</button>
+        <button id="newAppointment"> <i class="fa fa-calendar"></i> Nueva Cita</button>    
+    </header>
+    
+    <div id="listaPx" class="w3-container">
+        <table class="w3-table-all w3-hoverable">
+            <thead>
+                <tr class="w3-light-grey">
+                    <th>Nombre</th>
+                    <th>Edad</th>
+                    <th colspan="2">Action</th>
+                </tr>
+            </thead>
+            
             <tbody id="rows"></tbody>
         </table>
     </div>
     <input type="hidden" id="load"></input>
+    
+    <div id="calendarPx">
+        [calendario]
+    </div>
 </body>
 </html>

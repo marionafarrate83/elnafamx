@@ -2,14 +2,15 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/fireba
 import {
   getAuth,
   onAuthStateChanged,
-  signOut
+  signOut,
 } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
 import {
   getDatabase,
   ref,
   onValue,
   child,
-  get
+  get,
+  update,
 } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js";
 
 const firebaseConfig = {
@@ -70,12 +71,11 @@ newPxBtn.addEventListener("click", function () {
 });
 
 const botonLoad = document.getElementById("load");
-botonLoad.addEventListener("click",readDoctorPatients());
+botonLoad.addEventListener("click", readDoctorPatients());
 
-const divLista = document.getElementById("listaPx")
+const divLista = document.getElementById("listaPx");
 
 function readDoctorPatients() {
-  
   const dbRef = ref(database, "patient");
 
   onValue(
@@ -84,28 +84,57 @@ function readDoctorPatients() {
       snapshot.forEach((childSnapshot) => {
         const childKey = childSnapshot.key;
         const childData = childSnapshot.val();
-        console.log("childKey "+childKey);
+        console.log("childKey " + childKey);
         console.log(childData);
         console.log(childData.doctorId);
         console.log(childData.nombrePx);
         console.log(childData.edadPx);
-        if (childData.doctorId == varUid){
+        if (childData.doctorId == varUid) {
           var newRow = document.createElement("tr");
           var newCell = document.createElement("td");
           var newCell2 = document.createElement("td");
-          var newButton = document.createElement("button")
-          newButton.innerText="Editar";
-          newButton.setAttribute("value",childKey);
-          newButton.setAttribute("id",childKey);
-          newButton.addEventListener("click",function(){
-            console.log(newButton.value)
-            window.location.href = "newPx.html"+"?px=" + newButton.value
+          var newButton = document.createElement("button");
+          var newIcon = document.createElement("i");
+          newIcon.setAttribute("class","fa fa-eye");
+          var newButton2 = document.createElement("button");
+          newButton.innerHTML = '<i class="fa fa-eye"></i>';   
+          newButton.setAttribute("value", childKey);
+          newButton.setAttribute("id", childKey);
+          newButton.addEventListener("click", function () {
+            console.log(newButton.value);
+            window.location.href = "newPx.html" + "?px=" + newButton.value;
+          });
+          newButton2.innerHTML = '<i class="fa fa-trash"></i>';
+          newButton2.setAttribute("value", childKey);
+          newButton2.addEventListener("click", function () {
+
+            var res = confirm("estas seguro que deseas eliminar a este paciente?")
+
+            if (res) {
+
+              console.log(res);
+            console.log(newButton2.value);
+            const postData = null;
+            const updates = {};
+            updates["/patient/" + newButton2.value] = postData;
+            update(ref(database), updates)
+              .then(() => {
+                alert("Paciente Eliminado Exitosamente");
+                window.location.href = "logged.html";
+                })
+              .catch((error) => {
+                console.log("Error");
+                console.log(error);
+              });
+              
+            }  
           });
           newCell.innerHTML = childData.nombrePx;
           newRow.append(newCell);
           newCell2.innerHTML = childData.edadPx;
           newRow.append(newCell2);
           newRow.append(newButton);
+          newRow.append(newButton2);
           document.getElementById("rows").appendChild(newRow);
         }
       });
