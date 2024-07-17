@@ -5,16 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="newPx.css">
     <title>Medicapp</title>
     <script type="module" src="newPx.js"></script>
   </head>
   <body>
+
+    <div class="topnav w3-bar w3-black" id="myTopnav">
+      <a href="/medicapp/logged.html" class="w3-bar-item w3-button">Medicapp </a>
+      
+      <a href="#" class="w3-bar-item w3-button "  id="logoutBtn">Logout <i class="fa fa-sign-in"></i></a>
+      <a href="#" class="w3-bar-item w3-button " id="email"></a>
+      <a href="#" class="w3-bar-item w3-button " id="name"></a>
+      <a href="#"> <img id="profile" style="width: 30px; border-radius: 50%; margin-top: 5px;"> </a>
+
+      <a href="javascript:void(0);" class="icon" onclick="myFunctionResp()">
+          <i class="fa fa-bars"></i>
+      </a>
+      
+  </div>
+  
+
     <div class="w3-container">
     
-      <h2>Expediente Clínico</h2>
+      <h2>
+        <span>
+          <button id="goDashboard" class="btn btn-primary" style="margin-top: 5px;">
+          <i class="fa fa-home"></i></button>
+        </span>
+        Expediente Clínico 
+        <span>
+        <button id="btnGuardarPx" class="btn btn-primary w3-right" style="margin-top: 5px;">Guardar 
+        <i class="fa fa-save"></i></button>
+        </span>
+      </h2>
       
-      <div class="w3-container" id="ficha">
+      
+      <div class="w3-container ficha">
         <div class="form-group">
             <label for="nombre">Nombre Completo:</label>
             <input type="text" class="form-control" id="nombrePx" name="nombrePx" required>
@@ -25,11 +53,14 @@
             <input type="text" class="form-control" id="edadPx" name="edadPx" required>
         </div>
         <img id="profilePicPx" src="" alt="">
+
+        
+
       </div>
       
     <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-black w3-left-align" >Datos de Contacto</button>
       
-      <div id="Demo1" class="w3-hide w3-container">
+      <div id="Demo1" class="w3-hide w3-container ficha">
 
         <form action="#">
             <input type="hidden" id="userIdFld" placeholder="uid" />
@@ -49,7 +80,7 @@
             </div>
           </form>
       
-          <button id="btnGuardarPx" class="btn btn-primary">Guardar</button>
+          
         
       </div>
 
@@ -85,6 +116,17 @@
           }
         }
     </script>
+
+<script>
+  function myFunctionResp() {
+     var x = document.getElementById("myTopnav");
+     if (x.className === "topnav") {
+       x.className += " responsive";
+     } else {
+       x.className = "topnav";
+     }
+   }
+</script>
         
 
   </body>

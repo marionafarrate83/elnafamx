@@ -5,18 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="logged.css">
     <title>Medicapp</title>
     <script defer type="module" src="logged.js"></script>
 </head>
 <body>
 
-    <div class="w3-bar w3-black">
-        <a href="./medicapp/index.html" class="w3-bar-item w3-button">Medicapp </a>
+   <div class="topnav w3-bar w3-black" id="myTopnav">
+        <a href="/medicapp/logged.html" class="w3-bar-item w3-button">Medicapp </a>
         
-        <a href="#" class="w3-bar-item w3-button w3-right"  id="logoutBtn">Logout <i class="fa fa-sign-in"></i></a>
-        <a href="#" class="w3-bar-item w3-button w3-right" id="email"></a>
-        <a href="#" class="w3-bar-item w3-button w3-right" id="name"></a>
-        <img id="profile" class="w3-right" style="width: 30px; border-radius: 50%; margin-top: 5px;">
+        <a href="#" class="w3-bar-item w3-button "  id="logoutBtn">Logout <i class="fa fa-sign-in"></i></a>
+        <a href="#" class="w3-bar-item w3-button " id="email"></a>
+        <a href="#" class="w3-bar-item w3-button " id="name"></a>
+        <a href="#"> <img id="profile" style="width: 30px; border-radius: 50%; margin-top: 5px;"> </a>
+
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
         
     </div>
     
@@ -46,8 +51,21 @@
     </div>
     <input type="hidden" id="load"></input>
     
-    <div id="calendarPx">
+    <div class="w3-container" id="calendarPx">
         [calendario]
     </div>
+
+
+    <script>
+        function myFunction() {
+           var x = document.getElementById("myTopnav");
+           if (x.className === "topnav") {
+             x.className += " responsive";
+           } else {
+             x.className = "topnav";
+           }
+         }
+   </script>
+
 </body>
 </html>

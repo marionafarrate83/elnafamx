@@ -39,16 +39,41 @@ const database = getDatabase(app);
 console.log(database);
 const storage = getStorage(app);
 console.log(storage);
+let varUid = "";
 
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    getUserInfo(user);
-    console.log("oauth " + user.uid);
-    return user.uid;
+    updateUserProfile(user);
+    varUid = user.uid;
+    return varUid;
   } else {
     window.location.href = "index.html";
   }
+});
+
+function updateUserProfile(user) {
+  const userName = user.displayName;
+  const userEmail = user.email;
+  const userProfilePicture = user.photoURL;
+
+  document.getElementById("name").textContent = userName;
+  document.getElementById("email").textContent = userEmail;
+  document.getElementById("profile").src = userProfilePicture;
+
+  console.log(user.uid);
+}
+
+const logoutBtn = document.getElementById("logoutBtn");
+
+logoutBtn.addEventListener("click", function () {
+  signOut(auth)
+    .then(() => {
+      window.location.href = "index.html";
+    })
+    .catch((error) => {
+      // An error happened.
+    });
 });
 
 function getUserInfo(user) {
@@ -282,7 +307,13 @@ fileButton.addEventListener('change', function (e) {
 
   );
 
-
-
-
 });
+
+const goDashboardBtn = document.getElementById("goDashboard")
+goDashboardBtn.addEventListener("click", goDashboard)
+
+function goDashboard(){
+  if (confirm("¿Desea salir sin guardar cambios?, los cambios se perderán")){
+    window.location.href = "logged.html"
+  }
+}
