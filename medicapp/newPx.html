@@ -1,20 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="newPx.css">
     <title>Medicapp</title>
     <script type="module" src="newPx.js"></script>
-</head>
-<body>
-        <form action="#">
-            <input type="text" id="userIdFld" placeholder="uid" >
-            <input type="text" id="pxId" placeholder="pxId" >
-            <input type="text" id="nombrePx" placeholder="nombre">
-            <input type="text" id="edadPx" placeholder="edad">
-        </form>
-        
-        <button id="btnGuardarPx">Guardar</button>
+  </head>
+  <body>
+    <div class="w3-container">
     
-</body>
+      <h2>Expediente Clínico</h2>
+      
+      <div class="w3-container" id="ficha">
+        <div class="form-group">
+            <label for="nombre">Nombre Completo:</label>
+            <input type="text" class="form-control" id="nombrePx" name="nombrePx" required>
+        </div>
+
+        <div class="form-group">
+            <label for="edadPx">Edad:</label>
+            <input type="text" class="form-control" id="edadPx" name="edadPx" required>
+        </div>
+        <img id="profilePicPx" src="" alt="">
+      </div>
+      
+    <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-black w3-left-align" >Datos de Contacto</button>
+      
+      <div id="Demo1" class="w3-hide w3-container">
+
+        <form action="#">
+            <input type="hidden" id="userIdFld" placeholder="uid" />
+            <input type="hidden" id="pxId" placeholder="pxId" />
+            
+            <div class="form-group">
+                <label for="correo">Correo Electrónico:</label>
+                <input type="email" class="form-control" id="correo" name="correo" required>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" class="form-control" id="telefono" name="telefono" required>
+            </div>
+            <div class="form-group">
+                <label for="direccion">Dirección:</label>
+                <input type="text" class="form-control" id="direccion" name="direccion">
+            </div>
+          </form>
+      
+          <button id="btnGuardarPx" class="btn btn-primary">Guardar</button>
+        
+      </div>
+
+    <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-black w3-left-align"> Laboratorios e Imagenología </button>
+      <div id="Demo2" class="w3-hide w3-container">
+
+        <section id="uploadFiles" style="visibility: true">
+            <div>
+              <progress class="w3-blue" id="uploader" value="0" max="100">
+                0%
+              </progress>
+      
+              <input type="file" id="fileButton" value="upload" />
+      
+              <img id="uploadedImg" src="" alt="imagen" width="100px" />
+            </div>
+          </section>
+
+      </div>
+    </div>
+
+    <script>
+        function myFunction(id) {
+          var x = document.getElementById(id);
+          if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+            x.previousElementSibling.className = 
+            x.previousElementSibling.className.replace("w3-black", "w3-blue");
+          } else { 
+            x.className = x.className.replace(" w3-show", "");
+            x.previousElementSibling.className = 
+            x.previousElementSibling.className.replace("w3-blue", "w3-black");
+          }
+        }
+    </script>
+        
+
+  </body>
 </html>
