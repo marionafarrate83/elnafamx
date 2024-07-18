@@ -2,6 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/fireba
 import {
   getAuth,
   onAuthStateChanged,
+  signOut
 } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
 import {
   getDatabase,
@@ -46,6 +47,8 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     updateUserProfile(user);
     varUid = user.uid;
+    let uidField = document.getElementById("userIdFld");
+    uidField.setAttribute("value", varUid);
     return varUid;
   } else {
     window.location.href = "index.html";
@@ -92,13 +95,39 @@ function addPatient() {
   const postListRef = ref(database, "patient");
   const newPostRef = push(postListRef);
 
-  const insertNombre = document.getElementById("nombrePx").value;
-  const insertEdad = document.getElementById("edadPx").value;
-
+  const tipoDocumento = document.getElementById("tipoDocumento").value;
+  const numeroDocumento = document.getElementById("numeroDocumento").value;
+  const nombre = document.getElementById("nombre").value;
+  const apellido = document.getElementById("apellido").value;
+  const sexo = document.getElementById("sexo").value;
+  const fechaNacimiento = document.getElementById("fechaNacimiento").value;
+  const edad = document.getElementById("edad").value;
+  const grupoSanguineo = document.getElementById("grupoSanguineo").value;
+  const estadoCivil = document.getElementById("estadoCivil").value;
+  const ocupacion = document.getElementById("ocupacion").value;
+  const telefono = document.getElementById("telefono").value;
+  const correo = document.getElementById("correo").value;
+  const direccion = document.getElementById("direccion").value;
+  const ciudad = document.getElementById("ciudad").value;
+  const cp = document.getElementById("cp").value;
+  
   set(newPostRef, {
     doctorId: insertUID,
-    nombrePx: insertNombre,
-    edadPx: insertEdad,
+    tipoDocumento: tipoDocumento,
+    numeroDocumento: numeroDocumento,
+    nombre: nombre,
+    apellido: apellido,
+    sexo: sexo,
+    fechaNacimiento: fechaNacimiento,
+    edad: edad,
+    grupoSanguineo: grupoSanguineo,
+    estadoCivil: estadoCivil,
+    ocupacion: ocupacion,
+    telefono: telefono,
+    correo: correo,
+    direccion: direccion,
+    ciudad: ciudad,
+    cp: cp
   })
     .then(() => {
       alert("Paciente Creado Exitosamente");
@@ -129,10 +158,8 @@ function leerUrlParams() {
 }
 
 function loadPxInfo(px) {
-  console.log("paciente " + px);
 
   const dbRef = ref(database, "patient");
-
   onValue(
     dbRef,
     (snapshot) => {
@@ -141,10 +168,21 @@ function loadPxInfo(px) {
         const childData = childSnapshot.val();
         if (childKey == px) {
           console.log("childKey " + childKey);
-          console.log(childData.nombrePx);
-          console.log(childData.edadPx);
-          document.getElementById("nombrePx").value = childData.nombrePx;
-          document.getElementById("edadPx").value = childData.edadPx;
+          document.getElementById("tipoDocumento").value = childData.tipoDocumento;
+          document.getElementById("numeroDocumento").value = childData.numeroDocumento;
+          document.getElementById("nombre").value = childData.nombre;
+          document.getElementById("apellido").value = childData.apellido;
+          document.getElementById("sexo").value = childData.sexo;
+          document.getElementById("fechaNacimiento").value = childData.fechaNacimiento;
+          document.getElementById("edad").value = childData.edad;
+          document.getElementById("grupoSanguineo").value = childData.grupoSanguineo;
+          document.getElementById("estadoCivil").value = childData.estadoCivil;
+          document.getElementById("ocupacion").value = childData.ocupacion;
+          document.getElementById("telefono").value = childData.telefono;
+          document.getElementById("correo").value = childData.correo;
+          document.getElementById("direccion").value = childData.direccion;
+          document.getElementById("ciudad").value = childData.ciudad;
+          document.getElementById("cp").value = childData.cp;
         }
       });
     },
@@ -160,9 +198,8 @@ console.log("px existente " + valExPx);
 
 let sectionUploadFiles = document.getElementById("uploadFiles")
 
-
-
 let botonGuardar = document.getElementById("btnGuardarPx");
+
 if (valExPx) {
   botonGuardar.addEventListener("click", updatePatient);
   sectionUploadFiles.setAttribute("style","visibility: true")
@@ -179,13 +216,39 @@ function updatePatient() {
   console.log("value del campo " + insertUID);
 
   const insertPx = document.getElementById("pxId").getAttribute("value");
-  const insertNombre = document.getElementById("nombrePx").value;
-  const insertEdad = document.getElementById("edadPx").value;
+  const tipoDocumento = document.getElementById("tipoDocumento").value;
+  const numeroDocumento = document.getElementById("numeroDocumento").value;
+  const nombre = document.getElementById("nombre").value;
+  const apellido = document.getElementById("apellido").value;
+  const sexo = document.getElementById("sexo").value;
+  const fechaNacimiento = document.getElementById("fechaNacimiento").value;
+  const edad = document.getElementById("edad").value;
+  const grupoSanguineo = document.getElementById("grupoSanguineo").value;
+  const estadoCivil = document.getElementById("estadoCivil").value;
+  const ocupacion = document.getElementById("ocupacion").value;
+  const telefono = document.getElementById("telefono").value;
+  const correo = document.getElementById("correo").value;
+  const direccion = document.getElementById("direccion").value;
+  const ciudad = document.getElementById("ciudad").value;
+  const cp = document.getElementById("cp").value;
 
   const postData = {
     doctorId: insertUID,
-    nombrePx: insertNombre,
-    edadPx: insertEdad,
+    tipoDocumento: tipoDocumento,
+    numeroDocumento: numeroDocumento,
+    nombre: nombre,
+    apellido: apellido,
+    sexo: sexo,
+    fechaNacimiento: fechaNacimiento,
+    edad: edad,
+    grupoSanguineo: grupoSanguineo,
+    estadoCivil: estadoCivil,
+    ocupacion: ocupacion,
+    telefono: telefono,
+    correo: correo,
+    direccion: direccion,
+    ciudad: ciudad,
+    cp: cp
   };
 
   const updates = {};
@@ -205,9 +268,6 @@ function updatePatient() {
 var uploader = document.getElementById('uploader');
 
 var fileButton = document.getElementById('fileButton');
-
-
-
 
 fileButton.addEventListener('change', function (e) {
 
@@ -307,6 +367,22 @@ fileButton.addEventListener('change', function (e) {
 
   );
 
+});
+
+//validar campos
+const emailbox = document.getElementById('correo'); // capturo al input.
+const labelCorreo = document.getElementById('labelCorreo'); // capturo al label.
+
+// cuando escribimos en tu input "emailbox", escuchamos el evento "input"...
+emailbox.addEventListener("input", () => {
+  // y verificamos si está vacío el input "emailbox"...
+  if ((emailbox.value.trim() === '') || (!emailbox.checkValidity())) {
+    labelCorreo.style.color = 'red'; // si cumple, pintamos el label a rojo.
+    botonGuardar.setAttribute('disabled',false);
+  } else {
+    labelCorreo.style.color = 'black'; // de lo contrario, pintamos el label a negro.
+    botonGuardar.removeAttribute('disabled');
+  }
 });
 
 const goDashboardBtn = document.getElementById("goDashboard")

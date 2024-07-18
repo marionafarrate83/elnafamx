@@ -1,0 +1,36 @@
+.profile-img {
+    width: 200px; /* alto y ancho específico para que el círculo sea redondo */
+    height: 200px;
+    border-radius: 50%; 
+    overflow: hidden; /* oculta todo el contenido fuera de la caja */
+    position: relative;
+  }
+  
+  .profile-img img {
+    position: absolute;
+    width: 150%; /* Soluciona el problema de ubicación de las imágenes en cajas circulares */
+    left: -25%; /* posiciona al centro del contenedor la imagen */
+  }
+  
+  .profile-img .file {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    font-size: 15px;
+    background: #212529b8;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0 25px;
+   
+  }
+  
+  .profile-img .file input {
+    position: absolute;
+    display: block;
+    width: 100%;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    cursor: pointer; /* manita de selección al hacer hover */
+  }

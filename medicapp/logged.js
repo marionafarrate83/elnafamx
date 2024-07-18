@@ -49,7 +49,6 @@ function updateUserProfile(user) {
   document.getElementById("email").textContent = userEmail;
   document.getElementById("profile").src = userProfilePicture;
 
-  console.log(user.uid);
 }
 
 const logoutBtn = document.getElementById("logoutBtn");
@@ -73,19 +72,12 @@ newPxBtn.addEventListener("click", function () {
 const botonLoad = document.getElementById("load");
 botonLoad.addEventListener("click", readDoctorPatients());
 
-const divLista = document.getElementById("listaPx");
-
-var btnTargetPx = document.getElementById("btnTargetPx")
-btnTargetPx.addEventListener("click",buscaPx)
-
 var searchTargetPx1 = document.getElementById("searchTargetPx");
-searchTargetPx1.addEventListener("keyup",buscaPx)
+searchTargetPx1.addEventListener("keyup",buscaPx) 
 
 function buscaPx(){
   var searchTargetPx = document.getElementById("searchTargetPx");
-  var searchTargetPxValue = searchTargetPx.value;
-  console.log(searchTargetPxValue)
-  
+      
   const tableReg = document.getElementById('datos');
             const searchText = document.getElementById('searchTargetPx').value.toLowerCase();
             let total = 0;
@@ -127,40 +119,34 @@ function readDoctorPatients() {
       snapshot.forEach((childSnapshot) => {
         const childKey = childSnapshot.key;
         const childData = childSnapshot.val();
-        console.log("childKey " + childKey);
-        console.log(childData);
-        console.log(childData.doctorId);
-        console.log(childData.nombrePx);
-        console.log(childData.edadPx);
+        
         if (childData.doctorId == varUid) {
           var newRow = document.createElement("tr");
-          var newCell = document.createElement("td");
-          var newCell2 = document.createElement("td");
+          var nombre = document.createElement("td");
+          var apellido = document.createElement("td");
+          var fechaNacimiento = document.createElement("td");
+          var sexo = document.createElement("td");
+          var edad = document.createElement("td");
           var newButton = document.createElement("button");
-          var newIcon = document.createElement("i");
-          newIcon.setAttribute("class","fa fa-eye");
-          var newButton2 = document.createElement("button");
           newButton.innerHTML = '<i class="fa fa-eye"></i>';   
           newButton.setAttribute("value", childKey);
           newButton.setAttribute("id", childKey);
+          newButton.setAttribute("class","btn btn-primary")
           newButton.addEventListener("click", function () {
             console.log(newButton.value);
             window.location.href = "newPx.html" + "?px=" + newButton.value;
           });
+          var newButton2 = document.createElement("button");
           newButton2.innerHTML = '<i class="fa fa-trash"></i>';
           newButton2.setAttribute("value", childKey);
+          newButton2.setAttribute("class", "btn btn-danger");
           newButton2.addEventListener("click", function () {
-
             var res = confirm("estas seguro que deseas eliminar a este paciente?")
-
             if (res) {
-
-              console.log(res);
-            console.log(newButton2.value);
-            const postData = null;
-            const updates = {};
-            updates["/patient/" + newButton2.value] = postData;
-            update(ref(database), updates)
+              const postData = null;
+              const updates = {};
+              updates["/patient/" + newButton2.value] = postData;
+              update(ref(database), updates)
               .then(() => {
                 alert("Paciente Eliminado Exitosamente");
                 window.location.href = "logged.html";
@@ -169,13 +155,17 @@ function readDoctorPatients() {
                 console.log("Error");
                 console.log(error);
               });
-              
             }  
           });
-          newCell.innerHTML = childData.nombrePx;
-          newRow.append(newCell);
-          newCell2.innerHTML = childData.edadPx;
-          newRow.append(newCell2);
+          nombre.innerHTML = childData.nombre;
+          apellido.innerHTML = childData.apellido;
+          fechaNacimiento.innerHTML = childData.fechaNacimiento;
+          sexo.innerHTML = childData.sexo;
+          edad.innerHTML = childData.edad;
+          newRow.append(nombre);
+          newRow.append(apellido);
+          newRow.append(sexo);
+          newRow.append(edad);
           newRow.append(newButton);
           newRow.append(newButton2);
           document.getElementById("rows").appendChild(newRow);

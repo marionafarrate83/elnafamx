@@ -3,131 +3,201 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="newPx.css">
     <title>Medicapp</title>
     <script type="module" src="newPx.js"></script>
   </head>
-  <body>
+<body>
 
-    <div class="topnav w3-bar w3-black" id="myTopnav">
-      <a href="/medicapp/logged.html" class="w3-bar-item w3-button">Medicapp </a>
-      
-      <a href="#" class="w3-bar-item w3-button "  id="logoutBtn">Logout <i class="fa fa-sign-in"></i></a>
-      <a href="#" class="w3-bar-item w3-button " id="email"></a>
-      <a href="#" class="w3-bar-item w3-button " id="name"></a>
-      <a href="#"> <img id="profile" style="width: 30px; border-radius: 50%; margin-top: 5px;"> </a>
+<!-- Navbar -->
 
-      <a href="javascript:void(0);" class="icon" onclick="myFunctionResp()">
-          <i class="fa fa-bars"></i>
-      </a>
-      
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand">Medicapp</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+          <li class="nav-item">
+              <a class="nav-link" href="#" id="goDashboard">Inicio<span class="sr-only">(current)</span></a>
+          </li>
+          <li>
+            <a class="nav-link" id="logoutBtn">Salir <i class="fa fa-sign-in"></i></a>
+          </li>
+      </ul>
   </div>
-  
+</nav>
 
-    <div class="w3-container">
-    
-      <h2>
-        <span>
-          <button id="goDashboard" class="btn btn-primary" style="margin-top: 5px;">
-          <i class="fa fa-home"></i></button>
-        </span>
-        Expediente Clínico 
-        <span>
-        <button id="btnGuardarPx" class="btn btn-primary w3-right" style="margin-top: 5px;">Guardar 
-        <i class="fa fa-save"></i></button>
-        </span>
-      </h2>
-      
-      
-      <div class="w3-container ficha">
-        <div class="form-group">
-            <label for="nombre">Nombre Completo:</label>
-            <input type="text" class="form-control" id="nombrePx" name="nombrePx" required>
-        </div>
+<!-- Form Paciente -->
 
-        <div class="form-group">
-            <label for="edadPx">Edad:</label>
-            <input type="text" class="form-control" id="edadPx" name="edadPx" required>
-        </div>
-        <img id="profilePicPx" src="" alt="">
+<div class="container">
+  <h4>Datos Generales del Paciente</h4>
 
-        
+  <input id="userIdFld" placeholder="uid" hidden/>
+  <input id="pxId" placeholder="pxId" hidden/>
 
-      </div>
-      
-    <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-black w3-left-align" >Datos de Contacto</button>
-      
-      <div id="Demo1" class="w3-hide w3-container ficha">
-
-        <form action="#">
-            <input type="hidden" id="userIdFld" placeholder="uid" />
-            <input type="hidden" id="pxId" placeholder="pxId" />
-            
-            <div class="form-group">
-                <label for="correo">Correo Electrónico:</label>
-                <input type="email" class="form-control" id="correo" name="correo" required>
-            </div>
-            <div class="form-group">
-                <label for="telefono">Teléfono:</label>
-                <input type="tel" class="form-control" id="telefono" name="telefono" required>
-            </div>
-            <div class="form-group">
-                <label for="direccion">Dirección:</label>
-                <input type="text" class="form-control" id="direccion" name="direccion">
-            </div>
-          </form>
-      
-          
-        
-      </div>
-
-    <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-black w3-left-align"> Laboratorios e Imagenología </button>
-      <div id="Demo2" class="w3-hide w3-container">
-
-        <section id="uploadFiles" style="visibility: true">
-            <div>
-              <progress class="w3-blue" id="uploader" value="0" max="100">
-                0%
-              </progress>
-      
-              <input type="file" id="fileButton" value="upload" />
-      
-              <img id="uploadedImg" src="" alt="imagen" width="100px" />
-            </div>
-          </section>
-
+  <div class="row">
+    <div class="col-sm">
+      <div class="form-group">
+        <label for="tipoDocumento">Tipo de documento:</label>
+        <input type="text" class="form-control" id="tipoDocumento" name="tipoDocumento">
       </div>
     </div>
+    <div class="col-sm">
+      <div class="form-group">
+        <label for="numeroDocumento">Número de documento:</label>
+        <input type="text" class="form-control" id="numeroDocumento" name="numeroDocumento">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm">
+      <div class="form-group">
+        <label for="nombre">Nombre(s):</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" required>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="form-group">
+        <label for="apellido">Apellido(s):</label>
+        <input type="text" class="form-control" id="apellido" name="apellido" required>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm">
+      <div class="form-group">
+        <label for="sexo">Sexo:</label>
+        <select type="text" class="form-control" id="sexo" name="sexo" required>
+          <option>---</option>
+          <option>Femenino</option>
+          <option>Masculino</option>
+          <option>No responder</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="form-group">
+        <label for="fechaNacimiento">Fecha de Nac.:</label>
+        <input type="Date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" required>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="form-group">
+        <label for="edad">Edad:</label>
+        <input type="text" class="form-control" id="edad" name="edad" required>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="form-group">
+        <label for="grupoSanguineo">Grupo Sanguineo:</label>
+        <select type="text" class="form-control" id="grupoSanguineo" name="grupoSanguineo">
+          <option>---</option>
+          <option>A</option>
+          <option>B</option>
+          <option>O</option>
+          <option>AB</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm">
+      <div class="form-group">
+        <label for="estadoCivil">Estado Civil:</label>
+        <input type="text" class="form-control" id="estadoCivil" name="estadoCivil">
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="form-group">
+        <label for="ocupacion">Ocupación:</label>
+        <input type="tel" class="form-control" id="ocupacion" name="ocupacion">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm">
+      <div class="form-group">
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" class="form-control" id="telefono" name="telefono" required>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="form-group">
+        <label for="correo">Correo Electrónico:</label>
+        <input type="email" class="form-control" id="correo" name="correo" required>
+    </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm">
+      <div class="form-group">
+        <label for="direccion">Dirección:</label>
+        <input type="text" class="form-control" id="direccion" name="direccion" required>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm">
+      <div class="form-group">
+        <label for="ciudad">Ciudad:</label>
+        <input type="text" class="form-control" id="ciudad" name="ciudad" required>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="form-group">
+        <label for="cp">CP:</label>
+        <input type="text" class="form-control" id="cp" name="cp" required>
+      </div>
+    </div>
+  </div> 
+  <div class="row">
+    <div class="col-sm">
+      <button id="btnGuardarPx" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
+    </div>
+  </div>
+</div>
 
-    <script>
-        function myFunction(id) {
-          var x = document.getElementById(id);
-          if (x.className.indexOf("w3-show") == -1) {
-            x.className += " w3-show";
-            x.previousElementSibling.className = 
-            x.previousElementSibling.className.replace("w3-black", "w3-blue");
-          } else { 
-            x.className = x.className.replace(" w3-show", "");
-            x.previousElementSibling.className = 
-            x.previousElementSibling.className.replace("w3-blue", "w3-black");
-          }
-        }
-    </script>
+<section id="uploadFiles">
+  <div>
+    <progress class="w3-blue" id="uploader" value="0" max="100">
+      0%
+    </progress>
 
-<script>
-  function myFunctionResp() {
-     var x = document.getElementById("myTopnav");
-     if (x.className === "topnav") {
-       x.className += " responsive";
-     } else {
-       x.className = "topnav";
-     }
-   }
-</script>
-        
+    <input type="file" id="fileButton" value="upload"></input>
 
-  </body>
+    <img id="uploadedImg" src="" alt="imagen" width="100px" />
+  </div>
+</section>
+
+<footer>
+  <div class="container text-muted">
+    <div class="row">
+      <div class="col-sm text-center">
+        <div>Usuario:</div>
+      </div>
+      <div class="col-sm text-center">
+        <div id="name"></div>
+      </div>
+      <div class="col-sm text-center">
+        <div id="email"></div>
+      </div>
+      <div class="col-sm text-center">
+        <img id="profile" style="width: 30px; border-radius: 50%;">
+      </div>
+    </div>
+  </div>    
+</footer>
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
 </html>
