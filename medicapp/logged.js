@@ -128,20 +128,19 @@ function readDoctorPatients() {
           var sexo = document.createElement("td");
           var edad = document.createElement("td");
           var newButton = document.createElement("button");
-          newButton.innerHTML = '<i class="fa fa-eye"></i>';   
+          newButton.innerHTML = '<i class="fa fa-edit"></i> Ver/Editar Paciente';   
           newButton.setAttribute("value", childKey);
-          newButton.setAttribute("id", childKey);
           newButton.setAttribute("class","btn btn-primary")
           newButton.addEventListener("click", function () {
-            console.log(newButton.value);
             window.location.href = "newPx.html" + "?px=" + newButton.value;
           });
           var newButton2 = document.createElement("button");
-          newButton2.innerHTML = '<i class="fa fa-trash"></i>';
+          newButton2.innerHTML = '<i class="fa fa-trash"></i> Eliminar';
           newButton2.setAttribute("value", childKey);
           newButton2.setAttribute("class", "btn btn-danger");
           newButton2.addEventListener("click", function () {
             var res = confirm("estas seguro que deseas eliminar a este paciente?")
+            //TODO: Revisar validación de integridad referecnial con consultas o expediente
             if (res) {
               const postData = null;
               const updates = {};
@@ -157,6 +156,12 @@ function readDoctorPatients() {
               });
             }  
           });
+          var newButtonConsulta = document.createElement("button");
+          newButtonConsulta.innerHTML = '<i class="fa fa-plus"></i> Nueva consulta';
+          newButtonConsulta.setAttribute("value", childKey);
+          newButtonConsulta.setAttribute("class", "btn btn-success");
+
+
           nombre.innerHTML = childData.nombre;
           apellido.innerHTML = childData.apellido;
           fechaNacimiento.innerHTML = childData.fechaNacimiento;
@@ -167,6 +172,7 @@ function readDoctorPatients() {
           newRow.append(sexo);
           newRow.append(edad);
           newRow.append(newButton);
+          newRow.append(newButtonConsulta);
           newRow.append(newButton2);
           document.getElementById("rows").appendChild(newRow);
         }
