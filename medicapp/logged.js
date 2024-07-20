@@ -161,6 +161,9 @@ function readDoctorPatients() {
           newButtonConsulta.setAttribute("value", childKey);
           newButtonConsulta.setAttribute("class", "btn btn-success");
 
+          newButtonConsulta.addEventListener("click", function () {
+            window.location.href = "newConsultation.html" + "?px=" + newButtonConsulta.value;
+          });
 
           nombre.innerHTML = childData.nombre;
           apellido.innerHTML = childData.apellido;
